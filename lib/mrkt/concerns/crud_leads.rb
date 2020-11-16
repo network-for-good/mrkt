@@ -40,6 +40,23 @@ module Mrkt
       end
     end
 
+    def push_leads(leads, program_name:, lookup_field: nil, source: nil, reason: nil)
+      post_json('/rest/v1/leads/push.json') do
+        params = {
+          programName: program_name,
+          input: leads
+        }
+
+        optional = {
+          lookupField: lookup_field,
+          source: partition_name,
+          reason: async_processing
+        }
+
+        merge_params(params, optional)
+      end
+    end
+
     def delete_leads(leads)
       delete('/rest/v1/leads.json') do |req|
         json_payload(req, input: map_lead_ids(leads))
