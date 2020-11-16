@@ -49,8 +49,8 @@ module Mrkt
 
         optional = {
           lookupField: lookup_field,
-          source: partition_name,
-          reason: async_processing
+          source: source,
+          reason: reason
         }
 
         merge_params(params, optional)
